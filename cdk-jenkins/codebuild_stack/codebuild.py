@@ -52,7 +52,7 @@ class CodeBuildStack(Stack):
             self,
             "jenkins-build-artifacts",
             auto_delete_objects=True,
-            #encryption=s3.BucketEncryption.UNENCRYPTED,
+            encryption=s3.BucketEncryption.UNENCRYPTED,
             block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
             enforce_ssl=True,
             versioned=True,
@@ -256,6 +256,9 @@ class CodeBuildStack(Stack):
         # Grants CodeBuild project access to pull/push from s3
         s3_bucket.grant_read_write(codebuild_jar)
         s3_bucket.grant_read_write(codebuild_joern)
+        s3_bucket.grant_read_write(codebuild_behave_image_build)
+        s3_bucket.grant_read_write(codebuild_behave_scanning)
+        s3_bucket.grant_read_write(codebuild_webgoat_deploy)
 
         CfnOutput(self, "WebGoatBuildProjectName", value=codebuild_jar.project_name)
         CfnOutput(self, "JoernScanProjectName", value=codebuild_joern.project_name)
