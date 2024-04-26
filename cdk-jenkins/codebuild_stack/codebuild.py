@@ -52,7 +52,7 @@ class CodeBuildStack(Stack):
             self,
             "jenkins-build-artifacts",
             auto_delete_objects=True,
-            encryption=s3.BucketEncryption.UNENCRYPTED,
+            #encryption=s3.BucketEncryption.UNENCRYPTED,
             block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
             enforce_ssl=True,
             versioned=True,
